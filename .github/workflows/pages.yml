@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -17,6 +15,10 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # checkout reads the repository
+      pages: write # deploy-pages publishes the site
+      id-token: write # deploy-pages proves the run to Pages with an OIDC token
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
