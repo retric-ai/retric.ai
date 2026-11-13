@@ -2,18 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Page not found — Retric</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <!-- theme-color cannot read CSS variables: the values are copies of --site-desktop (tokens.css). -->
+  <meta name="theme-color" content="#e9e9e4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&amp;family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
+  <link rel="stylesheet" href="/assets/tokens.css">
   <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-  <main class="section contact">
-    <div class="wrap">
-      <h1 style="margin-inline:auto">404</h1>
-      <p class="section-lede">That page doesn't exist.</p>
-      <a class="btn" href="/">Back to retric.ai</a>
+  <main id="main" class="wrap notfound">
+    <div class="win">
+      <div class="win-bar"><span class="win-title mono">terminal: COM1</span></div>
+      <div class="win-body crt" aria-hidden="true">
+        <p><span class="pr">&gt;</span> ATDT retric.ai<span id="dial"></span></p>
+        <p>RING</p>
+        <p class="ok">NO CARRIER</p>
+      </div>
+      <div class="win-body">
+        <h1>404</h1>
+        <p>That page doesn't exist.</p>
+        <a class="btn btn-primary" href="/">Back to retric.ai</a>
+      </div>
     </div>
   </main>
+  <script>
+    // Echo the requested path on the dial line. Without JavaScript the line reads "ATDT retric.ai".
+    var dial = document.getElementById('dial');
+    if (dial) dial.textContent = location.pathname;
+  </script>
 </body>
 </html>

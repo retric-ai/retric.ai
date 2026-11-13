@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Retric — DevOps, Cloud &amp; Kubernetes Consulting</title>
   <meta name="description" content="Retric is an independent DevOps consultancy: cloud architecture, Kubernetes platforms, CI/CD, infrastructure as code, observability and AI-assisted engineering.">
   <link rel="canonical" href="https://retric.ai/">
@@ -10,8 +10,15 @@
   <meta property="og:title" content="Retric — DevOps, Cloud & Kubernetes Consulting">
   <meta property="og:description" content="Independent consultancy for cloud infrastructure, Kubernetes platforms, CI/CD and SRE.">
   <meta property="og:url" content="https://retric.ai/">
-  <meta name="theme-color" content="#0b1020">
+  <meta name="color-scheme" content="light dark">
+  <!-- theme-color cannot read CSS variables: the values are copies of --site-desktop (tokens.css). Change them when that token changes. -->
+  <meta name="theme-color" content="#e9e9e4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&amp;family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
+  <link rel="stylesheet" href="assets/tokens.css">
   <link rel="stylesheet" href="assets/site.css">
   <script type="application/ld+json">
   {
@@ -27,101 +34,186 @@
   </script>
 </head>
 <body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="mark" viewBox="0 0 32 32">
+      <rect class="mk-bg" width="32" height="32" rx="2"/>
+      <path class="mk-fg" d="M9.5 26V6.5H16a4.75 4.75 0 0 1 0 9.5H9.5M14 16l5.5 10"/>
+      <rect class="mk-cur" x="22" y="23" width="5.5" height="3"/>
+    </symbol>
+    <symbol id="ctl" viewBox="0 0 52 16">
+      <g class="ctl-btn"><rect x=".5" y=".5" width="15" height="15"/><rect x="18.5" y=".5" width="15" height="15"/><rect x="36.5" y=".5" width="15" height="15"/></g>
+      <path class="ctl-glyph" d="M4 11.5h8M22 4.5h8v7h-8zM22 5.5h8M40.5 4.5l7 7M47.5 4.5l-7 7"/>
+    </symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><g class="ico-g"><path d="M7 19h10.5a3.5 3.5 0 0 0 .5-6.97A5.5 5.5 0 0 0 7.3 10.6 4.2 4.2 0 0 0 7 19z"/><path d="M10.5 13.5 9 15l1.5 1.5M13.5 13.5 15 15l-1.5 1.5"/></g></symbol>
+    <symbol id="i-pods" viewBox="0 0 24 24"><g class="ico-g"><path d="M8.20 4.80 L11.49 6.70 L11.49 10.50 L8.20 12.40 L4.91 10.50 L4.91 6.70Z M15.80 4.80 L19.09 6.70 L19.09 10.50 L15.80 12.40 L12.51 10.50 L12.51 6.70Z M12.00 11.40 L15.29 13.30 L15.29 17.10 L12.00 19.00 L8.71 17.10 L8.71 13.30Z"/></g></symbol>
+    <symbol id="i-pipe" viewBox="0 0 24 24"><g class="ico-g"><circle cx="5" cy="15" r="2"/><circle cx="12" cy="15" r="2"/><circle cx="19" cy="15" r="2"/><path d="M7 15h3M14 15h3M5 13V8h14v5M17 6l2 2-2 2"/></g></symbol>
+    <symbol id="i-scope" viewBox="0 0 24 24"><g class="ico-g"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M6 16l3-4 3 2 3-5 3 2"/><path d="M6 8h12" stroke-dasharray="1.5 2"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g class="ico-g"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2.2 2.2L15 10.4"/></g></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><g class="ico-g"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9.5 4v3M12 4v3M14.5 4v3M9.5 17v3M12 17v3M14.5 17v3M4 9.5h3M4 12h3M4 14.5h3M17 9.5h3M17 12h3M17 14.5h3"/><path d="M9.5 10l2 2-2 2M12.5 14h2"/></g></symbol>
+  </svg>
+
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="Retric home">
-        <img src="assets/favicon.svg" alt="" width="28" height="28">
-        <span>retric<span class="dot">.ai</span></span>
+    <div class="wrap menubar">
+      <a class="brand" href="#top" aria-label="retric.ai home">
+        <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+        <span>retric<span class="tld">.ai</span></span>
       </a>
-      <nav aria-label="Primary">
+      <nav class="menu" aria-label="Primary">
         <a href="#services">Services</a>
         <a href="#approach">Approach</a>
         <a href="#work">Open source</a>
         <a href="#about">About</a>
-        <a class="btn btn-sm" href="#contact">Contact</a>
       </nav>
+      <a class="btn btn-primary btn-sm menubar-cta" href="#contact">Contact</a>
     </div>
   </header>
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="wrap">
-        <p class="eyebrow">Independent DevOps &amp; Cloud Consultancy</p>
-        <h1>Infrastructure that ships, scales, and stays quiet at 3&nbsp;a.m.</h1>
-        <p class="lede">
-          Retric helps engineering teams build reliable cloud platforms — Kubernetes, CI/CD,
-          infrastructure as code and observability — and adopt AI-assisted engineering without
-          giving up rigor. Two decades of operations experience, from tactical networks to
-          production clusters for retail and financial-services workloads.
-        </p>
-        <div class="cta">
-          <a class="btn" href="#contact">Start a conversation</a>
-          <a class="btn btn-ghost" href="#services">See services</a>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="prompt" aria-hidden="true">~$</span> Independent DevOps &amp; Cloud Consultancy</p>
+          <h1>Infrastructure that ships, scales, and stays quiet at 3&nbsp;a.m.</h1>
+          <p class="lede">
+            Retric helps engineering teams build reliable cloud platforms — Kubernetes, CI/CD,
+            infrastructure as code and observability — and adopt AI-assisted engineering without
+            giving up rigor. Two decades of operations experience, from tactical networks to
+            production clusters for retail and financial-services workloads.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contact">Start a conversation</a>
+            <a class="btn" href="#services">See services</a>
+          </div>
+          <ul class="badges" role="list" aria-label="Certifications">
+            <li class="badge"><span class="badge-code" aria-hidden="true">CKA</span><span class="badge-text">Certified Kubernetes Administrator</span></li>
+            <li class="badge"><span class="badge-code" aria-hidden="true">AWS<small>pro</small></span><span class="badge-text">AWS DevOps Engineer – Professional</span></li>
+            <li class="badge"><span class="badge-code" aria-hidden="true">AWS<small>assoc</small></span><span class="badge-text">AWS Developer &amp; SysOps – Associate</span></li>
+          </ul>
         </div>
-        <ul class="badges" aria-label="Certifications">
-          <li>Certified Kubernetes Administrator</li>
-          <li>AWS DevOps Engineer – Professional</li>
-          <li>AWS Developer &amp; SysOps – Associate</li>
-        </ul>
+
+        <div class="win win-active hero-art" aria-hidden="true">
+          <div class="win-bar">
+            <span class="win-title mono">topology.svg</span>
+            <svg class="win-ctl" focusable="false"><use href="#ctl"/></svg>
+          </div>
+          <div class="win-body art">
+            <svg viewBox="70 18 360 284" focusable="false">
+              <path class="moon" d="M116.1 46.1 A16 16 0 1 0 132.7 68.3 A14 14 0 0 1 116.1 46.1Z"/>
+              <path class="stars" d="M150 40v6M147 43h6M90 92v4M88 94h4M168 74v4M166 76h4"/>
+              <path class="iso-grid" d="M250.0 112.0 L97.6 200.0 M250.0 112.0 L402.4 200.0 M269.1 123.0 L116.6 211.0 M230.9 123.0 L383.4 211.0 M288.1 134.0 L135.7 222.0 M211.9 134.0 L364.3 222.0 M307.2 145.0 L154.7 233.0 M192.8 145.0 L345.3 233.0 M326.2 156.0 L173.8 244.0 M173.8 156.0 L326.2 244.0 M345.3 167.0 L192.8 255.0 M154.7 167.0 L307.2 255.0 M364.3 178.0 L211.9 266.0 M135.7 178.0 L288.1 266.0 M383.4 189.0 L230.9 277.0 M116.6 189.0 L269.1 277.0 M402.4 200.0 L250.0 288.0 M97.6 200.0 L250.0 288.0"/>
+              <g class="iso-box rack"><path class="f-right" d="M276.7 149.4 L253.8 162.6 L253.8 61.4 L276.7 48.2Z"/><path class="f-left" d="M227.1 147.2 L253.8 162.6 L253.8 61.4 L227.1 46.0Z"/><path class="f-top" d="M250.0 32.8 L276.7 48.2 L253.8 61.4 L227.1 46.0Z"/><path class="slot" d="M229.4 135.9 L251.5 148.6 M229.4 123.2 L251.5 136.0 M229.4 110.6 L251.5 123.3 M229.4 97.9 L251.5 110.7 M229.4 85.3 L251.5 98.0 M229.4 72.6 L251.5 85.4 M229.4 60.0 L251.5 72.7"/><circle class="led ok" cx="248.1" cy="140.3" r="2"/><circle class="led ok" cx="248.1" cy="115.0" r="2"/><circle class="led acc" cx="248.1" cy="77.1" r="2"/></g>
+              <g class="iso-box rack"><path class="f-right" d="M345.3 189.0 L318.6 204.4 L318.6 138.4 L345.3 123.0Z"/><path class="f-left" d="M291.9 189.0 L318.6 204.4 L318.6 138.4 L291.9 123.0Z"/><path class="f-top" d="M318.6 107.6 L345.3 123.0 L318.6 138.4 L291.9 123.0Z"/><path class="slot" d="M294.2 177.1 L316.3 189.9 M294.2 163.9 L316.3 176.7 M294.2 150.7 L316.3 163.5 M294.2 137.5 L316.3 150.3"/><circle class="led ok" cx="312.9" cy="194.5" r="2"/><circle class="led acc" cx="312.9" cy="154.9" r="2"/></g>
+              <path class="trace" pathLength="1" d="M265.2 156.0 L284.3 167.0 L211.9 208.8 L242.4 226.4"/>
+              <path class="packet p-a" pathLength="1" d="M265.2 156.0 L284.3 167.0 L211.9 208.8 L242.4 226.4"/>
+              <path class="trace" pathLength="1" d="M192.8 197.8 L211.9 208.8"/>
+              <path class="packet p-b" pathLength="1" d="M192.8 197.8 L211.9 208.8"/>
+              <path class="trace" pathLength="1" d="M307.2 197.8 L257.6 226.4"/>
+              <path class="packet p-c" pathLength="1" d="M307.2 197.8 L257.6 226.4"/>
+              <ellipse class="via" cx="284.3" cy="167.0" rx="4.6" ry="2.7"/>
+              <ellipse class="via" cx="211.9" cy="208.8" rx="4.6" ry="2.7"/>
+              <g class="iso-box rack"><path class="f-right" d="M211.9 186.8 L185.2 202.2 L185.2 123.0 L211.9 107.6Z"/><path class="f-left" d="M158.5 186.8 L185.2 202.2 L185.2 123.0 L158.5 107.6Z"/><path class="f-top" d="M185.2 92.2 L211.9 107.6 L185.2 123.0 L158.5 107.6Z"/><path class="slot" d="M160.8 174.9 L182.9 187.7 M160.8 161.7 L182.9 174.5 M160.8 148.5 L182.9 161.3 M160.8 135.3 L182.9 148.1 M160.8 122.1 L182.9 134.9"/><circle class="led acc" cx="179.5" cy="179.1" r="2"/><circle class="led ok" cx="179.5" cy="139.5" r="2"/></g>
+              <g class="iso-box core"><path class="f-right" d="M276.7 237.4 L250.0 252.8 L250.0 230.8 L276.7 215.4Z"/><path class="f-left" d="M223.3 237.4 L250.0 252.8 L250.0 230.8 L223.3 215.4Z"/><path class="f-top" d="M250.0 200.0 L276.7 215.4 L250.0 230.8 L223.3 215.4Z"/></g>
+              <path class="core-mark" d="M237.2 216.6 L252.1 208.0 L259.6 212.3 M259.6 212.3 L259.6 214.8 L256.4 216.6 L252.1 216.6 L244.7 212.3 M249.5 215.1 L248.4 223.1"/>
+            </svg>
+          </div>
+          <div class="win-status-row">
+            <span>4 nodes</span><span>3 links</span><span>pager: quiet</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="services" class="section">
       <div class="wrap">
+        <p class="kicker man" aria-hidden="true"><span>RETRIC(7)</span><span class="man-mid">Retric services manual</span><span>RETRIC(7)</span></p>
         <h2>Services</h2>
         <p class="section-lede">Focused engagements, from a two-week assessment to an embedded platform build.</p>
         <div class="grid">
-          <article class="card">
-            <h3>Cloud architecture &amp; IaC</h3>
-            <p>AWS and Google Cloud foundations designed for security, cost and change. Reusable Terraform and Pulumi modules, standardized and validated in the pipeline.</p>
-            <p class="tags">AWS · GCP · Terraform · Pulumi · CloudFormation</p>
+          <article class="win">
+            <div class="win-bar"><h3 class="win-title">Cloud architecture &amp; IaC</h3></div>
+            <div class="win-body">
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-cloud"/></svg>
+              <p>AWS and Google Cloud foundations designed for security, cost and change. Reusable Terraform and Pulumi modules, standardized and validated in the pipeline.</p>
+            </div>
+            <p class="win-status tags">AWS · GCP · Terraform · Pulumi · CloudFormation</p>
           </article>
-          <article class="card">
-            <h3>Kubernetes platforms</h3>
-            <p>EKS and GKE clusters tuned from real load-test data: right-sized workloads, autoscaling and resilience patterns that cut spend while improving headroom.</p>
-            <p class="tags">EKS · GKE · Helm · Kustomize · Argo CD</p>
+          <article class="win">
+            <div class="win-bar"><h3 class="win-title">Kubernetes platforms</h3></div>
+            <div class="win-body">
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pods"/></svg>
+              <p>EKS and GKE clusters tuned from real load-test data: right-sized workloads, autoscaling and resilience patterns that cut spend while improving headroom.</p>
+            </div>
+            <p class="win-status tags">EKS · GKE · Helm · Kustomize · Argo CD</p>
           </article>
-          <article class="card">
-            <h3>CI/CD &amp; developer platforms</h3>
-            <p>Self-hosted GitLab on Kubernetes, reusable GitHub Actions, quality gates, protected branches and dev containers that make the right path the easy path.</p>
-            <p class="tags">GitLab · GitHub Actions · Jenkins · Dev Containers</p>
+          <article class="win">
+            <div class="win-bar"><h3 class="win-title">CI/CD &amp; developer platforms</h3></div>
+            <div class="win-body">
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pipe"/></svg>
+              <p>Self-hosted GitLab on Kubernetes, reusable GitHub Actions, quality gates, protected branches and dev containers that make the right path the easy path.</p>
+            </div>
+            <p class="win-status tags">GitLab · GitHub Actions · Jenkins · Dev Containers</p>
           </article>
-          <article class="card">
-            <h3>Observability &amp; SRE</h3>
-            <p>SLO-driven monitoring, custom Prometheus exporters and dashboards that answer real questions. SRE bootstraps that bake reliability in from the first commit.</p>
-            <p class="tags">Prometheus · Grafana · Datadog · Sumo Logic · CloudWatch</p>
+          <article class="win">
+            <div class="win-bar"><h3 class="win-title">Observability &amp; SRE</h3></div>
+            <div class="win-body">
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-scope"/></svg>
+              <p>SLO-driven monitoring, custom Prometheus exporters and dashboards that answer real questions. SRE bootstraps that bake reliability in from the first commit.</p>
+            </div>
+            <p class="win-status tags">Prometheus · Grafana · Datadog · Sumo Logic · CloudWatch</p>
           </article>
-          <article class="card">
-            <h3>Security &amp; compliance</h3>
-            <p>PCI-aligned infrastructure, attribute-based IAM for multi-tenant teams, WAF management, secret hygiene and egress guardrails built into tooling.</p>
-            <p class="tags">IAM / ABAC · AWS WAF · PCI DSS · CodeQL</p>
+          <article class="win">
+            <div class="win-bar"><h3 class="win-title">Security &amp; compliance</h3></div>
+            <div class="win-body">
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>
+              <p>PCI-aligned infrastructure, attribute-based IAM for multi-tenant teams, WAF management, secret hygiene and egress guardrails built into tooling.</p>
+            </div>
+            <p class="win-status tags">IAM / ABAC · AWS WAF · PCI DSS · CodeQL</p>
           </article>
-          <article class="card">
-            <h3>AI-assisted engineering</h3>
-            <p>Bring LLM agents into the delivery workflow safely: multi-persona code review, MCP tool servers, RAG pipelines, and the invariants and tests that keep agents honest.</p>
-            <p class="tags">LLM agents · MCP · RAG · Python</p>
+          <article class="win">
+            <div class="win-bar"><h3 class="win-title">AI-assisted engineering</h3></div>
+            <div class="win-body">
+              <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chip"/></svg>
+              <p>Bring LLM agents into the delivery workflow safely: multi-persona code review, MCP tool servers, RAG pipelines, and the invariants and tests that keep agents honest.</p>
+            </div>
+            <p class="win-status tags">LLM agents · MCP · RAG · Python</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="approach" class="section alt">
+    <section id="approach" class="section">
       <div class="wrap">
+        <p class="kicker" aria-hidden="true"><span class="prompt">$</span> cat ENGAGE.TXT</p>
         <h2>How engagements work</h2>
-        <ol class="steps">
-          <li>
-            <h3>Assess</h3>
-            <p>A short, concrete review of your delivery pipeline, cloud estate and on-call reality. You get a prioritized findings report — not a slide deck of buzzwords.</p>
+        <ol class="steps" role="list">
+          <li class="win">
+            <div class="win-bar"><span class="win-title mono">setup: step 1 of 3</span></div>
+            <div class="win-body">
+              <div class="step-art" aria-hidden="true"><svg class="iso iso-assess" viewBox="0 0 141.6 124.2" focusable="false"><path class="g" d="M70.8 47.8L6 85.2M80.3 53.3L15.5 90.7M89.8 58.8L25.1 96.2M99.4 64.3L34.6 101.7M108.9 69.8L44.1 107.2M118.4 75.3L53.6 112.7M127.9 80.8L63.2 118.2M70.8 47.8L135.6 85.2M61.3 53.3L126 90.7M51.7 58.8L116.5 96.2M42.2 64.3L107 101.7M32.7 69.8L97.5 107.2M23.1 75.3L87.9 112.7M13.6 80.8L78.4 118.2"/><path class="wf" d="M120.3 85.2L70.8 56.6L21.2 85.2"/><path class="wf" d="M70.8 56.6L70.8 8.2"/><path class="e fr" d="M97.5 85.2L70.8 100.6L70.8 76.4L97.5 61Z"/><path class="e fl" d="M44.1 85.2L70.8 100.6L70.8 76.4L44.1 61Z"/><path class="e ft" d="M70.8 45.6L97.5 61L70.8 76.4L44.1 61Z"/><path class="wf" d="M120.3 85.2L70.8 113.8L21.2 85.2"/><path class="wf" d="M70.8 8.2L120.3 36.8L70.8 65.4L21.2 36.8L70.8 8.2"/><path class="wf" d="M120.3 85.2L120.3 36.8"/><path class="wf" d="M70.8 113.8L70.8 65.4"/><path class="wf" d="M21.2 85.2L21.2 36.8"/><circle class="via" cx="70.8" cy="8.2" r="2.2"/><circle class="via" cx="70.8" cy="113.8" r="2.2"/><circle class="via" cx="120.3" cy="36.8" r="2.2"/><circle class="via" cx="21.2" cy="36.8" r="2.2"/></svg></div>
+              <h3>Assess</h3>
+              <div class="progress" aria-hidden="true"><i></i></div>
+              <p>A short, concrete review of your delivery pipeline, cloud estate and on-call reality. You get a prioritized findings report — not a slide deck of buzzwords.</p>
+            </div>
           </li>
-          <li>
-            <h3>Build</h3>
-            <p>Hands-on implementation alongside your team, in your repositories, through your review process. Everything as code, everything tested.</p>
+          <li class="win">
+            <div class="win-bar"><span class="win-title mono">setup: step 2 of 3</span></div>
+            <div class="win-body">
+              <div class="step-art" aria-hidden="true"><svg class="iso iso-build" viewBox="0 0 141.6 125.3" focusable="false"><path class="g" d="M70.8 48.9L6 86.3M80.3 54.4L15.5 91.8M89.8 59.9L25.1 97.3M99.4 65.4L34.6 102.8M108.9 70.9L44.1 108.3M118.4 76.4L53.6 113.8M127.9 81.9L63.2 119.3M70.8 48.9L135.6 86.3M61.3 54.4L126 91.8M51.7 59.9L116.5 97.3M42.2 65.4L107 102.8M32.7 70.9L97.5 108.3M23.1 76.4L87.9 113.8M13.6 81.9L78.4 119.3"/><path class="e fr" d="M108.9 86.3L70.8 108.3L70.8 97.3L108.9 75.3Z"/><path class="e fl" d="M32.7 86.3L70.8 108.3L70.8 97.3L32.7 75.3Z"/><path class="e ft" d="M70.8 53.3L108.9 75.3L70.8 97.3L32.7 75.3Z"/><path class="e fr" d="M108.9 74.2L70.8 96.2L70.8 85.2L108.9 63.2Z"/><path class="e fl" d="M32.7 74.2L70.8 96.2L70.8 85.2L32.7 63.2Z"/><path class="e ft" d="M70.8 41.2L108.9 63.2L70.8 85.2L32.7 63.2Z"/><path class="wf" d="M32.7 62.1L32.7 39"/><path class="wf" d="M70.8 84.1L70.8 61"/><path class="wf" d="M108.9 62.1L108.9 39"/><path class="e fr" d="M108.9 39L70.8 61L70.8 50L108.9 28Z"/><path class="e fl" d="M32.7 39L70.8 61L70.8 50L32.7 28Z"/><path class="e ft st st1" d="M70.8 6L108.9 28L70.8 50L32.7 28Z"/></svg></div>
+              <h3>Build</h3>
+              <div class="progress" aria-hidden="true"><i></i></div>
+              <p>Hands-on implementation alongside your team, in your repositories, through your review process. Everything as code, everything tested.</p>
+            </div>
           </li>
-          <li>
-            <h3>Hand off</h3>
-            <p>Documentation, runbooks and pairing sessions so your engineers own the result. Success is when you no longer need us.</p>
+          <li class="win">
+            <div class="win-bar"><span class="win-title mono">setup: step 3 of 3</span></div>
+            <div class="win-body">
+              <div class="step-art" aria-hidden="true"><svg class="iso iso-handoff" viewBox="0 0 156.8 114.3" focusable="false"><path class="g" d="M55.5 24.7L6 53.3M65.1 30.2L15.5 58.8M74.6 35.7L25.1 64.3M84.1 41.2L34.6 69.8M93.6 46.7L44.1 75.3M103.2 52.2L53.6 80.8M112.7 57.7L63.2 86.3M122.2 63.2L72.7 91.8M131.7 68.7L82.2 97.3M141.3 74.2L91.7 102.8M150.8 79.7L101.3 108.3M55.5 24.7L150.8 79.7M46 30.2L141.3 85.2M36.5 35.7L131.7 90.7M27 41.2L122.2 96.2M17.4 46.7L112.7 101.7M7.9 52.2L103.2 107.2"/><path class="e fr" d="M76.5 50L49.8 65.4L49.8 41.2L76.5 25.8Z"/><path class="e fl" d="M23.1 50L49.8 65.4L49.8 41.2L23.1 25.8Z"/><path class="e ft" d="M49.8 10.4L76.5 25.8L49.8 41.2L23.1 25.8Z"/><path class="e ea fr" d="M133.7 83L107 98.4L107 74.2L133.7 58.8Z"/><path class="e ea fl" d="M80.3 83L107 98.4L107 74.2L80.3 58.8Z"/><path class="e ea ft" d="M107 43.4L133.7 58.8L107 74.2L80.3 58.8Z"/><path class="ta" d="M49.8 25.8L49.8 6L107 39L107 55.5"/><path class="ta" d="M102.2 46.1L107 55.5L111.7 51.6"/><circle class="via" cx="49.8" cy="25.8" r="2.2"/></svg></div>
+              <h3>Hand off</h3>
+              <div class="progress" aria-hidden="true"><i></i></div>
+              <p>Documentation, runbooks and pairing sessions so your engineers own the result. Success is when you no longer need us.</p>
+            </div>
           </li>
         </ol>
       </div>
@@ -129,76 +221,156 @@
 
     <section id="work" class="section">
       <div class="wrap">
+        <p class="kicker" aria-hidden="true"><span class="prompt">$</span> ls -l ~/src</p>
         <h2>Open source</h2>
         <p class="section-lede">Tools and patterns from real engagements, published for anyone to use.</p>
-        <div class="grid">
-          <a class="card link-card" href="https://github.com/retric-ai/devops-cli">
-            <h3>devops-cli</h3>
-            <p>Workstation CLI for SREs: multi-repo Git, Kubernetes, Argo CD, Grafana and Prometheus workflows plus multi-persona AI code review and an MCP server.</p>
-            <p class="tags">Python · MCP · Kubernetes</p>
-          </a>
-          <a class="card link-card" href="https://github.com/retric-ai/github-actions">
-            <h3>github-actions</h3>
-            <p>Reusable workflows and composite actions: Python quality gates, CodeQL scanning, releases and Kubernetes tool installs.</p>
-            <p class="tags">CI/CD · GitHub Actions</p>
-          </a>
-          <a class="card link-card" href="https://github.com/retric-ai/prisma-sase-exporter">
-            <h3>prisma-sase-exporter</h3>
-            <p>Prometheus exporter for Palo Alto Prisma SASE and SD-WAN: device health, VPN overlay and BGP peers, with Grafana dashboards.</p>
-            <p class="tags">Prometheus · Networking</p>
-          </a>
-          <a class="card link-card" href="https://github.com/retric-ai/sre-bootstrap">
-            <h3>sre-bootstrap</h3>
-            <p>Service template with Helm charts, IaC and observability wired in from day one: a starting point for a production-ready API.</p>
-            <p class="tags">SRE · Helm · Observability</p>
-          </a>
+        <div class="grid grid-2">
+          <article class="win repo">
+            <div class="win-bar"><span class="win-title mono"><span class="perm" aria-hidden="true">drwxr-xr-x</span> dan-petty/devops-cli/</span></div>
+            <div class="win-body">
+              <h3><a href="https://github.com/dan-petty/devops-cli">devops-cli</a></h3>
+              <p>Workstation CLI for SREs: multi-repo Git, Kubernetes, Argo CD, Grafana and Prometheus workflows plus multi-persona AI code review and an MCP server.</p>
+            </div>
+            <p class="win-status tags">Python · MCP · Kubernetes</p>
+          </article>
+          <article class="win repo">
+            <div class="win-bar"><span class="win-title mono"><span class="perm" aria-hidden="true">drwxr-xr-x</span> retric-ai/github-actions/</span></div>
+            <div class="win-body">
+              <h3><a href="https://github.com/retric-ai/github-actions">github-actions</a></h3>
+              <p>Reusable workflows and composite actions: Python quality gates, CodeQL scanning, releases and Kubernetes tool installs.</p>
+            </div>
+            <p class="win-status tags">CI/CD · GitHub Actions</p>
+          </article>
+          <article class="win repo">
+            <div class="win-bar"><span class="win-title mono"><span class="perm" aria-hidden="true">drwxr-xr-x</span> dan-petty/pano-sase-prom-exporter/</span></div>
+            <div class="win-body">
+              <h3><a href="https://github.com/dan-petty/pano-sase-prom-exporter">pano-sase-prom-exporter</a></h3>
+              <p>Prometheus exporter for Palo Alto Prisma SASE and SD-WAN: device health, VPN overlay and BGP peers, with Grafana dashboards.</p>
+            </div>
+            <p class="win-status tags">Prometheus · Networking</p>
+          </article>
+          <article class="win repo">
+            <div class="win-bar"><span class="win-title mono"><span class="perm" aria-hidden="true">drwxr-xr-x</span> dan-petty/sre-api-bootstrap/</span></div>
+            <div class="win-body">
+              <h3><a href="https://github.com/dan-petty/sre-api-bootstrap">sre-api-bootstrap</a></h3>
+              <p>Service template with Helm charts, IaC and observability wired in from day one: a starting point for a production-ready API.</p>
+            </div>
+            <p class="win-status tags">SRE · Helm · Observability</p>
+          </article>
         </div>
-        <p class="more"><a href="https://github.com/retric-ai">All repositories on GitHub →</a></p>
+        <p class="more">All repositories on GitHub: <a href="https://github.com/retric-ai">retric-ai</a> · <a href="https://github.com/dan-petty">dan-petty</a></p>
       </div>
     </section>
 
-    <section id="about" class="section alt">
-      <div class="wrap about">
-        <div>
-          <h2>About</h2>
-          <p>
-            Retric is the independent practice of <strong>Daniel Petty</strong>, a cloud and DevOps
-            engineer based in Salt Lake City. The last decade has gone into building and
-            modernizing infrastructure as a senior consultant and cloud engineer for retail,
-            financial-services, media and aviation organizations, and as an AWS architect
-            for a regulated SaaS platform.
-          </p>
-          <p>
-            Before that came eight years in U.S. Army IT and communications roles, including
-            special operations — a lesson in building systems that work under pressure and that
-            the people running them actually understand.
-          </p>
+    <section id="about" class="section">
+      <div class="wrap">
+        <p class="kicker" aria-hidden="true"><span class="prompt">$</span> cat ~/.plan</p>
+        <h2>About</h2>
+        <div class="about">
+          <div class="win">
+            <div class="win-bar"><span class="win-title mono">finger @retric.ai</span></div>
+            <div class="win-body prose">
+              <p class="finger mono"><span>Name: Daniel Petty</span><span>Office: Salt Lake City, UT</span><span>Plan: <b>retric</b> [assess] [build] [hand-off]</span></p>
+              <p>
+                Retric is the independent practice of <strong>Daniel Petty</strong>, a cloud and DevOps
+                engineer based in Salt Lake City. The last decade has gone into building and
+                modernizing infrastructure as a senior consultant and cloud engineer for retail,
+                financial-services, media and aviation organizations, and as an AWS architect
+                for a regulated SaaS platform.
+              </p>
+              <p>
+                Before that came eight years in U.S. Army IT and communications roles, including
+                special operations — a lesson in building systems that work under pressure and that
+                the people running them actually understand.
+              </p>
+            </div>
+          </div>
+          <div class="win">
+            <div class="win-bar"><span class="win-title">System properties</span></div>
+            <div class="win-body sheet">
+              <dl class="facts">
+                <div><dt>20+</dt><dd>years in IT &amp; operations</dd></div>
+                <div><dt>10+</dt><dd>years of DevOps &amp; cloud consulting</dd></div>
+                <div><dt>AWS · GCP</dt><dd>multi-cloud, PCI-aware delivery</dd></div>
+                <div><dt>CKA</dt><dd>Certified Kubernetes Administrator</dd></div>
+              </dl>
+            </div>
+          </div>
         </div>
-        <dl class="facts">
-          <div><dt>20+</dt><dd>years in IT &amp; operations</dd></div>
-          <div><dt>10+</dt><dd>years of DevOps &amp; cloud consulting</dd></div>
-          <div><dt>AWS · GCP</dt><dd>multi-cloud, PCI-aware delivery</dd></div>
-          <div><dt>CKA</dt><dd>Certified Kubernetes Administrator</dd></div>
-        </dl>
       </div>
     </section>
 
     <section id="contact" class="section contact">
-      <div class="wrap">
-        <h2>Let's talk</h2>
-        <p class="section-lede">Have a platform to build, a pipeline to fix, or an AI rollout to make safe? Send a short note about where you are and where you want to be.</p>
-        <a class="btn btn-lg" href="mailto:contact@retric.ai">contact@retric.ai</a>
-        <p class="small">Remote across the United States · Based in Salt Lake City, UT</p>
+      <div class="wrap contact-grid">
+        <div>
+          <p class="kicker" aria-hidden="true"><span class="prompt">$</span> talk sysop</p>
+          <h2>Let's talk</h2>
+          <p class="section-lede">Have a platform to build, a pipeline to fix, or an AI rollout to make safe? Send a short note about where you are and where you want to be.</p>
+          <a class="btn btn-primary btn-lg" href="mailto:contact@retric.ai">contact@retric.ai</a>
+          <p class="small">Remote across the United States · Based in Salt Lake City, UT</p>
+        </div>
+        <div class="win modem" aria-hidden="true">
+          <div class="win-bar"><span class="win-title mono">terminal: COM1</span><svg class="win-ctl" focusable="false"><use href="#ctl"/></svg></div>
+          <div class="win-body crt">
+            <p><span class="pr">&gt;</span> ATZ</p>
+            <p class="ok">OK</p>
+            <p><span class="pr">&gt;</span> ATDT contact@retric.ai</p>
+            <svg class="wave" viewBox="0 0 600 64" preserveAspectRatio="none" focusable="false"><path class="wave-line" pathLength="1" d="M0 32 2 37 4 40 6 41 8 39 10 35 12 29 14 25 16 23 18 24 20 27 22 32 24 37 26 40 28 41 30 39 32 35 34 29 36 25 38 23 40 24 42 27 44 32 46 37 48 40 50 41 52 39 54 35 56 29 58 25 60 23 62 24 64 27 66 32 68 37 70 40 72 41 74 39 76 35 78 29 80 25 82 23 84 24 86 27 88 32 90 37 100 32 110 14 111.5 24 113 46 114.5 46 116 24 117.5 14 119 32 120.5 50 122 40 123.5 18 125 18 126.5 40 128 50 129.5 32 131 14 132.5 24 134 46 135.5 46 137 24 138.5 14 140 32 141.5 50 143 40 144.5 18 146 18 147.5 40 149 50 150.5 32 152 14 153.5 24 155 46 156.5 46 158 24 159.5 14 161 32 162.5 50 164 40 165.5 18 167 18 168.5 40 170 50 171.5 32 173 14 174.5 24 176 46 177.5 46 179 24 180.5 14 182 32 183.5 50 185 40 186.5 18 188 18 189.5 40 191 50 192.5 32 194 14 195.5 24 197 46 198.5 46 200 24 212 32 222 32 230 12 240 12 240 52 250 52 250 21 260 21 260 43 270 43 270 12 280 12 280 52 290 52 290 21 300 21 300 43 310 43 310 12 320 12 320 52 330 52 338 32 340 14 343 23 346 42 349 31 352 45 355 54 358 37 361 14 364 32 367 38 370 33 373 10 376 22 379 20 382 45 385 16 388 38 391 15 394 33 397 16 400 50 403 9 406 33 409 54 412 9 415 53 418 44 421 30 424 37 427 55 430 53 433 55 436 30 439 45 442 20 445 35 448 55 451 44 454 52 457 48 460 29 463 19 466 45 469 20 478 32 480 32 481.2 38 482.5 32 483.8 26 485 32 486.2 38 487.5 32 488.8 26 490 32 491.2 38 492.5 32 493.8 26 495 32 496.2 38 497.5 32 498.8 26 500 32 501.2 38 502.5 32 503.8 26 505 32 506.2 38 507.5 32 508.8 26 510 32 511.2 38 512.5 32 513.8 26 515 32 516.2 38 517.5 32 518.8 26 520 32 521.2 38 522.5 32 523.8 26 525 32 526.2 38 527.5 32 528.8 26 530 32 531.2 38 532.5 32 533.8 26 535 32 536.2 38 537.5 32 538.8 26 540 32 541.2 38 542.5 32 543.8 26 545 32 546.2 38 547.5 32 548.8 26 550 32 551.2 38 552.5 32 553.8 26 555 32 556.2 38 557.5 32 558.8 26 560 32 561.2 38 562.5 32 563.8 26 565 32 566.2 38 567.5 32 568.8 26 570 32 571.2 38 572.5 32 573.8 26 575 32 576.2 38 577.5 32 578.8 26 580 32 581.2 38 582.5 32 583.8 26 585 32 586.2 38 587.5 32 588.8 26 590 32 591.2 38 592.5 32 593.8 26 595 32 596.2 38 597.5 32 598.8 26 600 32"/></svg>
+            <p class="ok">CONNECT 56000/V.90<span class="cursor"></span></p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <p>© <span id="year">2026</span> Retric. All rights reserved.</p>
-      <p><a href="https://github.com/retric-ai">GitHub</a></p>
+      <nav class="ring" aria-label="Webring">
+        <a href="https://github.com/retric-ai"><span aria-hidden="true">&laquo;</span> prev: retric-ai on GitHub</a>
+        <span class="ring-hub">
+          <svg class="ring-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+            <circle class="ring-loop" cx="20" cy="20" r="14"/>
+            <circle class="ring-node" cx="20" cy="6" r="3"/><circle class="ring-node" cx="32.1" cy="13" r="3"/><circle class="ring-node" cx="32.1" cy="27" r="3"/>
+            <circle class="ring-node" cx="20" cy="34" r="3"/><circle class="ring-node" cx="7.9" cy="27" r="3"/><circle class="ring-node ring-here" cx="7.9" cy="13" r="3"/>
+          </svg>
+          <a href="#top">retric.ai ring</a>
+        </span>
+        <a href="https://github.com/dan-petty">next: dan-petty on GitHub <span aria-hidden="true">&raquo;</span></a>
+      </nav>
+
+      <ul class="b88s" role="list" aria-label="Site buttons">
+        <li><a class="b88" href="https://github.com/retric-ai/retric.ai" aria-label="view source on GitHub"><b aria-hidden="true">&lt;/&gt;</b><span>view source</span></a></li>
+        <li><span class="b88"><b>SVG</b><span>vector</span></span></li>
+        <li><span class="b88"><b>any</b><span>browser</span></span></li>
+      </ul>
+
+      <p class="hangup" aria-hidden="true"><span>+++ATH0</span><span>NO CARRIER</span></p>
+
+      <div class="statusbar">
+        <p>© <span id="year">2026</span> Retric. All rights reserved.</p>
+        <p class="uptime" aria-hidden="true">03:00:00 up 365 days, 1 user, load average: 0.00, 0.00, 0.00</p>
+        <p>Document: Done</p>
+      </div>
     </div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+  (function () {
+    var d = document;
+    var y = d.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+
+    // Play the modem handshake once, when the terminal comes into view.
+    var modem = d.querySelector('.modem');
+    if (modem && 'IntersectionObserver' in window) {
+      modem.classList.add('armed');
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { modem.classList.add('on'); io.disconnect(); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(modem);
+    }
+  })();
+  </script>
 </body>
 </html>
