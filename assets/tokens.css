@@ -14,7 +14,7 @@
  * Copies of token values outside this file (they cannot read CSS variables, so a person updates them
  * when a token changes):
  *   assets/favicon.svg            color.accent and color.bg, light (#0b6e8a, #ffffff) and dark (#78c5da, #151514)
- *   index.html meta theme-color   --site-desktop, light (#e9e9e4) and dark (#0f0f0e)
+ *   index.html and 404.html meta theme-color   --site-desktop, light (#e9e9e4) and dark (#0f0f0e)
  */
 
 /* ---- tokens-base.css ---- */
