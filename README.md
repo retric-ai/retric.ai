@@ -41,7 +41,7 @@ assets/tokens.css           design tokens, copied from devops-cli src/devops_cli
 assets/site.css             styles: every color, font, space and radius comes from tokens.css (light/dark via prefers-color-scheme)
 assets/favicon.svg          logo mark
 .github/workflows/pages.yml GitHub Pages deployment
-.nojekyll                   serve the files as they are, with no Jekyll build
+.nojekyll                   stops a Jekyll build if Pages publishes from a branch (the Actions deploy has no Jekyll step)
 CNAME                       custom domain for GitHub Pages
 robots.txt                  crawler rules
 sitemap.xml                 sitemap
